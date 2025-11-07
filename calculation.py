@@ -5,33 +5,31 @@ app = QApplication([])
 main_win = QWidget()
 main_win.setWindowTitle('Калькулятор')
 
-#! Виджеты
-#? Кноки
-# Цифры
-button_0 = QPushButton('0')
-button_1 = QPushButton('1')
-button_2 = QPushButton('2')
-button_3 = QPushButton('3')
-button_4 = QPushButton('4')
-button_5 = QPushButton('5')
-button_6 = QPushButton('6')
-button_7 = QPushButton('7')
-button_8 = QPushButton('8')
-button_9 = QPushButton('9')
-# Арифметические операторы
-button_plus = QPushButton('+')
-button_minus = QPushButton('-')
-button_multiplication = QPushButton('*')
-button_division = QPushButton(':')
-button_equally = QPushButton('=')
-# Прочие символы
-button_point = QPushButton('.')
-button_left_bracket = QPushButton('(')
-button__right_bracket = QPushButton(')')
-button_delete = QPushButton('c')
-button_backspace = QPushButton('<=')
-#? Дисплэй
+q = 2
+WINDOW_SIZE = 235*q
+DISPLAY_HEIGHT = 35*q
+BUTTON_SIZE = 40*q
+
+main_win.setFixedSize(WINDOW_SIZE,WINDOW_SIZE)
+
+#Лэйауты
+main_layout = QVBoxLayout()
+grid_layout = QGridLayout()
+
+
+#Виджеты
 text_win = QTextEdit()
+text_win.setFixedHeight(DISPLAY_HEIGHT)
+text_win.setAlignment(Qt.AlignmentFlag.AlignRight)
+text_win.setReadOnly(True)
+
+
+keyBoard = [
+            ["7", "8", "9", "/", "C"],
+            ["4", "5", "6", "*", "("],
+            ["1", "2", "3", "-", ")"],
+            ["0", "00", ".", "+", "="],
+        ]
 
 
 
@@ -39,17 +37,24 @@ text_win = QTextEdit()
 
 
 
-text_win = QTextEdit()
+
+
+main_layout.addWidget(text_win)
+c=0
+for k in range(4):
+    for i in range(5):
+        b = QPushButton(keyBoard[c][i])
+        b.setFixedSize(BUTTON_SIZE,BUTTON_SIZE)
+        grid_layout.addWidget(b,c,i)
+    c+=1
 
 
 
 
 
 
-
-
-
-
+main_layout.addLayout(grid_layout)
+main_win.setLayout(main_layout)
 
 
 
