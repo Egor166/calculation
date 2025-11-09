@@ -5,6 +5,7 @@ app = QApplication([])
 main_win = QWidget()
 main_win.setWindowTitle('Калькулятор')
 
+text = ''
 q = 2
 WINDOW_SIZE = 235*q
 DISPLAY_HEIGHT = 35*q
@@ -12,16 +13,31 @@ BUTTON_SIZE = 40*q
 
 main_win.setFixedSize(WINDOW_SIZE,WINDOW_SIZE)
 
+def button(t):
+    def handler():
+        global text
+        text = text+t
+        display.setText(text)
+    return handler
+
+
+
+
+
+
+
+
+
 #Лэйауты
 main_layout = QVBoxLayout()
 grid_layout = QGridLayout()
 
 
 #Виджеты
-text_win = QTextEdit()
-text_win.setFixedHeight(DISPLAY_HEIGHT)
-text_win.setAlignment(Qt.AlignmentFlag.AlignRight)
-text_win.setReadOnly(True)
+display = QTextEdit()
+display.setFixedHeight(DISPLAY_HEIGHT)
+display.setAlignment(Qt.AlignmentFlag.AlignRight)
+display.setReadOnly(True)
 
 
 keyBoard = [
@@ -36,15 +52,15 @@ keyBoard = [
 
 
 
+buttons = []
 
-
-
-main_layout.addWidget(text_win)
+main_layout.addWidget(display)
 c=0
 for k in range(4):
     for i in range(5):
         b = QPushButton(keyBoard[c][i])
         b.setFixedSize(BUTTON_SIZE,BUTTON_SIZE)
+        buttons.append(b)
         grid_layout.addWidget(b,c,i)
     c+=1
 
@@ -58,7 +74,8 @@ main_win.setLayout(main_layout)
 
 
 
-
+buttons[0].clicked.connect(button('7'))
+buttons[1].clicked.connect(button('8'))
 
 
 
